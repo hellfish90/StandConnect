@@ -119,35 +119,35 @@ public class EventContainer extends AppCompatActivity
         ArrayList<Entity> dataContentList = new ArrayList<>();
 
         if (id == R.id.nav_business) {
-
+            //listfragment
             fragment = new ListEventContainerFragment();
             dataContentList = eventContainerController.getAllBusiness("eventid");
 
             // Handle the camera action
         } else if (id == R.id.nav_products) {
-
+            //listfragment
             fragment = new ListEventContainerFragment();
             dataContentList = eventContainerController.getAllBusiness("eventid");
 
         } else if (id == R.id.nav_events_map) {
-
+            //stands image
             fragment = new ListEventContainerFragment();
             dataContentList = eventContainerController.getAllBusiness("eventid");
 
 
         } else if (id == R.id.nav_location) {
-
-            fragment = new ListEventContainerFragment();
+            //maps
+            fragment = new LocationFragment();
             dataContentList = eventContainerController.getAllBusiness("eventid");
 
 
         } else if (id == R.id.nav_tags) {
-
+            //checkList de tags
             fragment = new ListEventContainerFragment();
             dataContentList = eventContainerController.getAllBusiness("eventid");
 
         } else if (id == R.id.nav_profile) {
-
+            //FormUserProfile
             fragment = new ListEventContainerFragment();
             dataContentList = eventContainerController.getAllBusiness("eventid");
 
