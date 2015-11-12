@@ -5,7 +5,6 @@ import com.standconnect.Models.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,24 +18,23 @@ public class DummyContent  implements Serializable{
     /**
      * An array of sample (dummy) items.
      */
-    public static ArrayList<Entity> ITEMS = new ArrayList<Entity>();
-
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static ArrayList<Entity> ITEM_BUSINESS_DUMMY = new ArrayList<Entity>();
+    public static ArrayList<Entity> ITEM_PRODUCT_DUMMY = new ArrayList<Entity>();
+    public static ArrayList<Entity> ITEM_TAGS_DUMMY = new ArrayList<Entity>();
 
     static {
         // Add 3 sample items.
-        addItem(new DummyItem("1", "Item 1"));
-        addItem(new DummyItem("2", "Item 2"));
-        addItem(new DummyItem("3", "Item 3"));
-    }
+        ITEM_BUSINESS_DUMMY.add(new DummyItem("1", "Business1"));
+        ITEM_BUSINESS_DUMMY.add(new DummyItem("2", "Business2"));
+        ITEM_BUSINESS_DUMMY.add(new DummyItem("3", "Business3"));
 
-    private static void addItem(DummyItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
-    }
+        ITEM_PRODUCT_DUMMY.add(new DummyItem("1", "Product1"));
+        ITEM_PRODUCT_DUMMY.add(new DummyItem("2", "Product2"));
+        ITEM_PRODUCT_DUMMY.add(new DummyItem("3", "Product3"));
 
+        ITEM_TAGS_DUMMY.add(new DummyItem("1", "Tag1"));
+        ITEM_TAGS_DUMMY.add(new DummyItem("2", "Tag2"));
+        ITEM_TAGS_DUMMY.add(new DummyItem("3", "Tag3"));
+    }
 
 }

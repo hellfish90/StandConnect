@@ -14,7 +14,15 @@ public class EventContainerController {
 
     public ArrayList<Entity> getAllBusiness(String id){
 
-        return DummyContent.ITEMS;
+        return DummyContent.ITEM_BUSINESS_DUMMY;
+    }
+
+    public ArrayList<Entity> getAllProducts(String id){
+        return DummyContent.ITEM_PRODUCT_DUMMY;
+    }
+
+    public ArrayList<Entity> getAllTags(String id){
+        return DummyContent.ITEM_TAGS_DUMMY;
     }
 
     public void scan(){

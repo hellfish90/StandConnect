@@ -127,7 +127,7 @@ public class EventContainer extends AppCompatActivity
         } else if (id == R.id.nav_products) {
             //listfragment
             fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
+            dataContentList = eventContainerController.getAllProducts("eventid");
 
         } else if (id == R.id.nav_events_map) {
             //stands image
@@ -144,7 +144,7 @@ public class EventContainer extends AppCompatActivity
         } else if (id == R.id.nav_tags) {
             //checkList de tags
             fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
+            dataContentList = eventContainerController.getAllTags("eventid");
 
         } else if (id == R.id.nav_profile) {
             //FormUserProfile
