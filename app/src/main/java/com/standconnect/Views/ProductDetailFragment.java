@@ -67,8 +67,6 @@ public class ProductDetailFragment extends Fragment {
         if (getArguments() != null) {
             this.product = (Product) getArguments().getSerializable(ARG_PRODUCT);
         }
-
-
     }
 
     @Override
