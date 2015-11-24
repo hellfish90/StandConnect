@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="500dp"
         android:layout_height="175dp"
-        android:id="@+id/imageView3"
+        android:id="@+id/imageview_detail_business"
         android:scaleType="centerInside"
         android:src="@drawable/logoempresa" />
 
@@ -17,7 +17,7 @@
         android:text="Business"
         android:textSize="20dp"
         android:id="@+id/textView"
-        android:layout_below="@+id/imageView3"
+        android:layout_below="@+id/imageview_detail_business"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="31dp" />
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView6"
+        android:id="@+id/textview_name_detail_business"
         android:layout_alignBottom="@+id/textView"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toEndOf="@+id/textView2"
@@ -81,37 +81,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView7"
+        android:id="@+id/textview_description_detail_business"
         android:layout_above="@+id/textView3"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6" />
+        android:layout_alignLeft="@+id/textview_name_detail_business"
+        android:layout_alignStart="@+id/textview_name_detail_business" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView8"
+        android:id="@+id/textview_contact_detail_business"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
+        android:layout_alignLeft="@+id/textview_description_detail_business"
+        android:layout_alignStart="@+id/textview_description_detail_business" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView9"
+        android:id="@+id/textview_phone_detail_business"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/textView8"
-        android:layout_alignStart="@+id/textView8" />
+        android:layout_alignLeft="@+id/textview_contact_detail_business"
+        android:layout_alignStart="@+id/textview_contact_detail_business" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView10"
+        android:id="@+id/textview_adress_detail_business"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_alignLeft="@+id/textView9"
-        android:layout_alignStart="@+id/textView9" />
+        android:layout_alignLeft="@+id/textview_phone_detail_business"
+        android:layout_alignStart="@+id/textview_phone_detail_business" />
 
 
 </RelativeLayout>

@@ -1,16 +1,24 @@
 package com.standconnect.Views;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.standconnect.Models.Bussines;
 import com.standconnect.R;
+
+import java.io.InputStream;
+import java.net.URL;
 
 
 /**
@@ -26,6 +34,10 @@ public class BusinessDetailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_BUSINESS = "BUSINESS";
 
+    TextView name, description,contact,phone,adress;
+    ImageView image;
+
+    private DownloadImageTask taskLoadImage;
 
     // TODO: Rename and change types of parameters
     private Bussines business;
@@ -65,11 +77,28 @@ public class BusinessDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        View view = inflater.inflate(R.layout.fragment_detail_business, container, false);
+
+        name = (TextView) view.findViewById(R.id.textview_name_detail_business);
+        description = (TextView) view.findViewById(R.id.textview_description_detail_business);
+        contact = (TextView) view.findViewById(R.id.textview_contact_detail_business);
+        phone = (TextView) view.findViewById(R.id.textview_phone_detail_business);
+        adress = (TextView) view.findViewById(R.id.textview_adress_detail_business);
+        image = (ImageView) view.findViewById(R.id.imageview_detail_business);
+
         Log.d("BusinessDetailFragment", business.toString());
 
+        name.setText(business.getName());
+        description.setText(business.getDescription());
+        contact.setText(business.getContact());
+        phone.setText(business.getPhone());
+        adress.setText(business.getAddress());
 
+        taskLoadImage = new DownloadImageTask();
 
-        return inflater.inflate(R.layout.fragment_detail_business, container, false);
+        taskLoadImage.execute(business.getImage());
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -99,6 +128,32 @@ public class BusinessDetailFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Drawable> {
+        /** The system calls this to perform work in a worker thread and
+         * delivers it the parameters given to AsyncTask.execute() */
+
+        private Drawable loadImageFromNetwork(String url) {
+            try {
+                InputStream is = (InputStream) new URL(url).getContent();
+                Drawable d = Drawable.createFromStream(is, "src name");
+                return d;
+            } catch (Exception e) {
+                System.out.println("Exc=" + e);
+                return null;
+            }
+        }
+
+        protected Drawable doInBackground(String... urls) {
+            return loadImageFromNetwork(urls[0]);
+        }
+
+        /** The system calls this to perform work in the UI thread and delivers
+         * the result from doInBackground() */
+        protected void onPostExecute(Drawable result) {
+            image.setImageDrawable(result);
+        }
     }
 
 }
