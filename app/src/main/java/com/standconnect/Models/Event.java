@@ -14,6 +14,15 @@ public class Event implements Entity{
     String location;
     String image;
 
+    public Event(String name, Date beginDate, Date endDate, String schedule, String location, String image) {
+        this.name = name;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.schedule = schedule;
+        this.location = location;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }

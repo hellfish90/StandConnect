@@ -10,6 +10,13 @@ public class Product implements Entity{
     double price;
     String image;
 
+    public Product(String name, String description, double price, String image) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }

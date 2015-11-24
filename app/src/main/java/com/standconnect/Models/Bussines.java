@@ -13,6 +13,16 @@ public class Bussines implements Entity{
     String phone;
     String address;
 
+    public Bussines(String name, String description, int standNumber, String image, String contact, String phone, String address) {
+        this.name = name;
+        this.description = description;
+        this.standNumber = standNumber;
+        this.image = image;
+        this.contact = contact;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public String getName() {
         return name;
     }

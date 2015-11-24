@@ -8,6 +8,10 @@ public class Beacon implements Entity{
     String name;
     String mac;
 
+    public Beacon(String name, String mac) {
+        this.name = name;
+        this.mac = mac;
+    }
 
     public String getName() {
         return name;

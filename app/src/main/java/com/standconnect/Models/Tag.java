@@ -6,6 +6,10 @@ package com.standconnect.Models;
 public class Tag implements Entity{
     String name;
 
+    public Tag(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

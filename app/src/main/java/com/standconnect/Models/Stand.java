@@ -8,6 +8,11 @@ public class Stand implements Entity{
     String name;
     int number;
 
+    public Stand(String name, int number) {
+        this.name = name;
+        this.number = number;
+    }
+
     public String getName() {
         return name;
     }
