@@ -1,11 +1,9 @@
 package com.standconnect.Models;
 
-import java.io.Serializable;
-
 /**
  * Created by Marc on 24/11/15.
  */
-public class Bussines implements Entity {
+public class Business implements Entity {
 
     String name;
     String description;
@@ -15,7 +13,7 @@ public class Bussines implements Entity {
     String phone;
     String address;
 
-    public Bussines(String name, String description, int standNumber, String image, String contact, String phone, String address) {
+    public Business(String name, String description, int standNumber, String image, String contact, String phone, String address) {
         this.name = name;
         this.description = description;
         this.standNumber = standNumber;
@@ -86,7 +84,7 @@ public class Bussines implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Bussines bussines = (Bussines) o;
+        Business bussines = (Business) o;
 
         if (name != null ? !name.equals(bussines.name) : bussines.name != null) return false;
         return !(phone != null ? !phone.equals(bussines.phone) : bussines.phone != null);
@@ -102,7 +100,7 @@ public class Bussines implements Entity {
 
     @Override
     public String toString() {
-        return "Bussines{" +
+        return "Business{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", standNumber=" + standNumber +

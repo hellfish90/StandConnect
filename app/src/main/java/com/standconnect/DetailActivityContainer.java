@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.standconnect.Models.Bussines;
+import com.standconnect.Models.Business;
 import com.standconnect.Models.Entity;
 import com.standconnect.Models.Product;
 import com.standconnect.Views.BusinessDetailFragment;
@@ -35,9 +35,9 @@ public class DetailActivityContainer extends AppCompatActivity {
             Log.e("DetailActivityContainer","Error no savedInstanceState");
         }
 
-        if (detailData instanceof Bussines){
+        if (detailData instanceof Business){
 
-            Bussines business = (Bussines) detailData;
+            Business business = (Business) detailData;
 
             Fragment fragment= BusinessDetailFragment.newInstance(business);
 

@@ -1,6 +1,5 @@
 package com.standconnect;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,13 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.standconnect.Models.Bussines;
 import com.standconnect.Models.Entity;
-import com.standconnect.Models.Product;
-import com.standconnect.dummy.DummyContent;
 import com.standconnect.dummy.DummyItem;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.standconnect.Views;
 
 import android.app.Fragment;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.standconnect.Models.Bussines;
+import com.standconnect.Models.Business;
 import com.standconnect.R;
 
 import java.io.InputStream;
@@ -40,7 +39,7 @@ public class BusinessDetailFragment extends Fragment {
     private DownloadImageTask taskLoadImage;
 
     // TODO: Rename and change types of parameters
-    private Bussines business;
+    private Business business;
 
 
     private OnFragmentInteractionListener mListener;
@@ -52,7 +51,7 @@ public class BusinessDetailFragment extends Fragment {
      * @return A new instance of fragment BusinessDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BusinessDetailFragment newInstance(Bussines argBusiness) {
+    public static BusinessDetailFragment newInstance(Business argBusiness) {
         BusinessDetailFragment fragment = new BusinessDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_BUSINESS, argBusiness);
@@ -68,7 +67,7 @@ public class BusinessDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.business = (Bussines) getArguments().getSerializable(ARG_BUSINESS);
+            this.business = (Business) getArguments().getSerializable(ARG_BUSINESS);
         }
     }
 
