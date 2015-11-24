@@ -1,6 +1,7 @@
 package com.standconnect;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.standconnect.Models.Bussines;
+import com.standconnect.Models.Entity;
+import com.standconnect.Models.Product;
 import com.standconnect.dummy.DummyContent;
 import com.standconnect.dummy.DummyItem;
 
@@ -117,6 +121,18 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(dataEventContentList.get(position).id);
         }
+
+        Entity dataSelected = dataEventContentList.get(position);
+
+        Bundle args = new Bundle();
+
+        args.putSerializable(DetailActivityContainer.ARG_DETAIL_CONTENT_ENTITY,dataSelected);
+
+        Intent i =new Intent(getActivity(),DetailActivityContainer.class);
+        i.putExtras(args);
+
+        startActivity(i);
+
     }
 
     /**

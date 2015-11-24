@@ -1,31 +1,35 @@
-package com.standconnect;
+package com.standconnect.Views;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.standconnect.Models.Bussines;
+import com.standconnect.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
+ * {@link BusinessDetailFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
+ * Use the {@link BusinessDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class BusinessDetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_BUSINESS = "BUSINESS";
+
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Bussines business;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -33,21 +37,18 @@ public class ProfileFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
+     * @return A new instance of fragment BusinessDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static BusinessDetailFragment newInstance(Bussines argBusiness) {
+        BusinessDetailFragment fragment = new BusinessDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_BUSINESS, argBusiness);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ProfileFragment() {
+    public BusinessDetailFragment() {
         // Required empty public constructor
     }
 
@@ -55,8 +56,7 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            this.business = (Bussines) getArguments().getSerializable(ARG_BUSINESS);
         }
     }
 
@@ -64,7 +64,12 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+
+        Log.d("BusinessDetailFragment", business.toString());
+
+
+
+        return inflater.inflate(R.layout.fragment_detail_business, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -73,6 +78,7 @@ public class ProfileFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
     @Override
     public void onDetach() {

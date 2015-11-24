@@ -1,5 +1,7 @@
 package com.standconnect.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by Marc on 24/11/15.
  */

@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.standconnect.Controllers.EventContainerController;
 import com.standconnect.Models.Entity;
+import com.standconnect.Views.LocationFragment;
+import com.standconnect.Views.ProfileFragment;
 
 import java.util.ArrayList;
 import java.util.Locale;

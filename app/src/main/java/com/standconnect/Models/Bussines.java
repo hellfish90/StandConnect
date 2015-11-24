@@ -1,9 +1,11 @@
 package com.standconnect.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by Marc on 24/11/15.
  */
-public class Bussines implements Entity{
+public class Bussines implements Entity {
 
     String name;
     String description;
