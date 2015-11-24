@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textview_description_detail_business"
-        android:layout_above="@+id/textView3"
+        android:layout_alignBottom="@+id/textView2"
         android:layout_alignLeft="@+id/textview_name_detail_business"
         android:layout_alignStart="@+id/textview_name_detail_business" />
 
