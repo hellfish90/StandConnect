@@ -8,9 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.standconnect.Models.Product;
 import com.standconnect.R;
+import com.standconnect.Utils.DownloadImageTask;
 
 
 /**
@@ -26,9 +29,13 @@ public class ProductDetailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PRODUCT = "PRODUCT";
 
-
     // TODO: Rename and change types of parameters
     private Product product;
+
+    private TextView name, description,price;
+    private ImageView image;
+
+    private DownloadImageTask taskLoadImage;
 
 
     private OnFragmentInteractionListener mListener;
@@ -59,18 +66,33 @@ public class ProductDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             this.product = (Product) getArguments().getSerializable(ARG_PRODUCT);
-
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
+
+        name = (TextView) view.findViewById(R.id.textview_name_detail_product);
+        description = (TextView) view.findViewById(R.id.textview_description_detail_product);
+        price = (TextView) view.findViewById(R.id.textview_price_detail_product);
+        image = (ImageView) view.findViewById(R.id.imageview_detail_product);
+
         Log.d("ProductDetailFragment",product.toString());
 
+        name.setText(product.getName());
+        description.setText(product.getDescription());
+        price.setText(String.valueOf(product.getPrice()));
+
+        taskLoadImage = new DownloadImageTask();
+        taskLoadImage.loadImageView(image);
+        taskLoadImage.execute(product.getImage());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_detail, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

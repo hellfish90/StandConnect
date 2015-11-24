@@ -2,6 +2,7 @@ package com.standconnect.Views;
 
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.standconnect.Models.Business;
 import com.standconnect.R;
+import com.standconnect.Utils.DownloadImageTask;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -94,7 +96,7 @@ public class BusinessDetailFragment extends Fragment {
         adress.setText(business.getAddress());
 
         taskLoadImage = new DownloadImageTask();
-
+        taskLoadImage.loadImageView(image);
         taskLoadImage.execute(business.getImage());
 
         return view;
@@ -129,30 +131,5 @@ public class BusinessDetailFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Drawable> {
-        /** The system calls this to perform work in a worker thread and
-         * delivers it the parameters given to AsyncTask.execute() */
-
-        private Drawable loadImageFromNetwork(String url) {
-            try {
-                InputStream is = (InputStream) new URL(url).getContent();
-                Drawable d = Drawable.createFromStream(is, "src name");
-                return d;
-            } catch (Exception e) {
-                System.out.println("Exc=" + e);
-                return null;
-            }
-        }
-
-        protected Drawable doInBackground(String... urls) {
-            return loadImageFromNetwork(urls[0]);
-        }
-
-        /** The system calls this to perform work in the UI thread and delivers
-         * the result from doInBackground() */
-        protected void onPostExecute(Drawable result) {
-            image.setImageDrawable(result);
-        }
-    }
 
 }
