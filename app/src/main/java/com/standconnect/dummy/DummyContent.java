@@ -1,5 +1,6 @@
 package com.standconnect.dummy;
 
+import com.standconnect.Models.Beacon;
 import com.standconnect.Models.Business;
 import com.standconnect.Models.Entity;
 import com.standconnect.Models.Product;
@@ -22,6 +23,8 @@ public class DummyContent  implements Serializable{
     public static ArrayList<Entity> ITEM_BUSINESS_DUMMY = new ArrayList<Entity>();
     public static ArrayList<Entity> ITEM_PRODUCT_DUMMY = new ArrayList<Entity>();
     public static ArrayList<Entity> ITEM_TAGS_DUMMY = new ArrayList<Entity>();
+    public static  ArrayList<Beacon> ITEM_BEACONS_EVENT = new ArrayList<>();
+
 
     static {
         // Add 3 sample items.
@@ -63,6 +66,9 @@ public class DummyContent  implements Serializable{
         ITEM_TAGS_DUMMY.add(new Tag("Dulce"));
         ITEM_TAGS_DUMMY.add(new Tag("Salado"));
         ITEM_TAGS_DUMMY.add(new Tag("Picante"));
+
+        ITEM_BEACONS_EVENT.add(new Beacon("","",0,0,0,"D0:5F:B8:30:D9:93"));
+
     }
 
 }

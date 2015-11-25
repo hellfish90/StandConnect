@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.standconnect.Models.Beacon;
 import com.standconnect.Utils.Util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -33,6 +34,8 @@ public class BeaconScannerController {
 
     private Activity activity;
 
+    private ArrayList<Beacon> standBeacons;
+
 
     public BeaconScannerController(Activity act){
         this.activity = act;
@@ -50,7 +53,9 @@ public class BeaconScannerController {
 
     }
 
-    public void startScanner(){
+    public void startScanner(ArrayList<Beacon> beacons){
+
+        standBeacons=beacons;
         scanRunable.run();
     }
 
@@ -150,9 +155,15 @@ public class BeaconScannerController {
                 Txpower = scanRecord[startByte+ 24];
             }
 
-            Beacon beacon = new Beacon(uuid,device.getName(),major,minor,rssi);
-            Log.i("BeaconScanerController","NEW!!");
-            Log.d(TAG, "Device name: " + beacon.getName() + " UUID: " + beacon.getUUID() + "  Major: " + beacon.getMajor() + " Minor: " + beacon.getMinor() + " rssi: " + beacon.getRssi() + " power: " + Txpower+ " mac:"+device.getAddress());
+            Beacon beacon = new Beacon(uuid,device.getName(),major,minor,rssi,device.getAddress());
+
+            Log.i("BeaconScanerController", "NEW!!");
+            Log.d(TAG, "Device name: " + beacon.getName() + " UUID: " + beacon.getUUID() + "  Major: " + beacon.getMajor() + " Minor: " + beacon.getMinor() + " rssi: " + beacon.getRssi() + " power: " + Txpower + " mac:" + device.getAddress());
+
+            if (standBeacons.contains(beacon) && rssi >  -70){
+                Log.i("StandBeacon",device.getAddress()+" ->>>" + rssi);
+            }
+
 
 
             String ID_item = "Device name: " + beacon.getName() + "\nUUID: " + beacon.getUUID() + "\nMajor: " + beacon.getMajor() + "\nMinor: " + beacon.getMinor();

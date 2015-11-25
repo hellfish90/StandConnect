@@ -22,6 +22,7 @@ import com.standconnect.Controllers.EventContainerController;
 import com.standconnect.Models.Entity;
 import com.standconnect.Views.LocationFragment;
 import com.standconnect.Views.ProfileFragment;
+import com.standconnect.dummy.DummyContent;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -56,7 +57,7 @@ public class EventContainer extends AppCompatActivity
                             .setAction("Action", null).show();
                 }else{
 
-                    eventContainerController.scan();
+                    eventContainerController.scan(DummyContent.ITEM_BEACONS_EVENT);
                     fab.setImageResource(R.mipmap.ic_gps_fixed_white_24dp);
                     Snackbar.make(view, "Is Scanning", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();

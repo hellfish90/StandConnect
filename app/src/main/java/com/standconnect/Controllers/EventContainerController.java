@@ -2,6 +2,7 @@ package com.standconnect.Controllers;
 
 import android.app.Activity;
 
+import com.standconnect.Models.Beacon;
 import com.standconnect.Models.Entity;
 import com.standconnect.dummy.DummyContent;
 
@@ -33,9 +34,9 @@ public class EventContainerController {
         return DummyContent.ITEM_TAGS_DUMMY;
     }
 
-    public void scan(){
+    public void scan(ArrayList<Beacon> beacons){
         isScanning = true;
-        beaconScannerController.startScanner();
+        beaconScannerController.startScanner(beacons);
     }
 
     public void stopScan(){

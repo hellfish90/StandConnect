@@ -8,21 +8,23 @@ import java.io.Serializable;
 /**
  * Created by Marc on 24/11/15.
  */
-public class Beacon implements Parcelable {
+public class Beacon implements Parcelable, Entity {
 
     private final String uuid;
     private final String name;
     private final int major;
     private final int minor;
     private final int rssi;
+    private final String mac;
 
-    public Beacon(String proximityUUID, String BeaconName, int major, int minor, int rssi) {
-        this.uuid = proximityUUID;
-        this.name = BeaconName;
+
+    public Beacon(String uuid, String name, int major, int minor, int rssi, String mac) {
+        this.uuid = uuid;
+        this.name = name;
         this.major = major;
         this.minor = minor;
         this.rssi = rssi;
-
+        this.mac = mac;
     }
 
     protected Beacon(Parcel in) {
@@ -31,6 +33,7 @@ public class Beacon implements Parcelable {
         major = in.readInt();
         minor = in.readInt();
         rssi = in.readInt();
+        mac = null;
     }
 
     public static final Creator<Beacon> CREATOR = new Creator<Beacon>() {
@@ -66,18 +69,20 @@ public class Beacon implements Parcelable {
         return rssi;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        if (obj != null) {
-            Beacon beacon = (Beacon) obj;
-            if (this.uuid == beacon.uuid && this.major == beacon.major && this.minor == beacon.minor)
-                return true;
-        }
+        Beacon beacon = (Beacon) o;
 
+        return mac.equals(beacon.mac);
 
-        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return mac.hashCode();
     }
 
     @Override
