@@ -1,5 +1,7 @@
 package com.standconnect.Controllers;
 
+import android.app.Activity;
+
 import com.standconnect.Models.Entity;
 import com.standconnect.dummy.DummyContent;
 
@@ -11,6 +13,12 @@ import java.util.ArrayList;
 public class EventContainerController {
 
     private boolean isScanning = false;
+
+    BeaconScannerController beaconScannerController;
+
+    public EventContainerController(Activity act){
+        beaconScannerController = new BeaconScannerController(act);
+    }
 
     public ArrayList<Entity> getAllBusiness(String id){
 
@@ -27,10 +35,12 @@ public class EventContainerController {
 
     public void scan(){
         isScanning = true;
+        beaconScannerController.startScanner();
     }
 
     public void stopScan(){
         isScanning = false;
+        beaconScannerController.stopScanner();
     }
 
     public boolean isScan(){
