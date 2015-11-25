@@ -36,6 +36,7 @@ public class BeaconScannerController {
 
     private ArrayList<Beacon> standBeacons;
 
+    private ArrayList<Beacon> standBeaconsShowed;
 
     public BeaconScannerController(Activity act){
         this.activity = act;
@@ -49,6 +50,7 @@ public class BeaconScannerController {
         }
 
         scanhandler = new Handler();
+        standBeaconsShowed =new ArrayList<>();
 
 
     }
@@ -160,11 +162,10 @@ public class BeaconScannerController {
             Log.i("BeaconScanerController", "NEW!!");
             Log.d(TAG, "Device name: " + beacon.getName() + " UUID: " + beacon.getUUID() + "  Major: " + beacon.getMajor() + " Minor: " + beacon.getMinor() + " rssi: " + beacon.getRssi() + " power: " + Txpower + " mac:" + device.getAddress());
 
-            if (standBeacons.contains(beacon) && rssi >  -70){
+            if (rssi >  -70 && !standBeaconsShowed.contains(beacon) && standBeacons.contains(beacon) ){
                 Log.i("StandBeacon",device.getAddress()+" ->>>" + rssi);
+                standBeaconsShowed.add(beacon);
             }
-
-
 
             String ID_item = "Device name: " + beacon.getName() + "\nUUID: " + beacon.getUUID() + "\nMajor: " + beacon.getMajor() + "\nMinor: " + beacon.getMinor();
 
