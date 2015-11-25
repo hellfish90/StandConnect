@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.standconnect.Models.Beacon;
+import com.standconnect.Models.Stand;
 import com.standconnect.Utils.Util;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.HashMap;
  * Created by Marc on 25/11/15.
  */
 public class BeaconScannerController {
+
+    NotificationController notificationController;
 
     private static String TAG = "BLEScanner";
 
@@ -51,6 +54,7 @@ public class BeaconScannerController {
 
         scanhandler = new Handler();
         standBeaconsShowed =new ArrayList<>();
+        notificationController =new NotificationController();
 
 
     }
@@ -165,6 +169,8 @@ public class BeaconScannerController {
             if (rssi >  -70 && !standBeaconsShowed.contains(beacon) && standBeacons.contains(beacon) ){
                 Log.i("StandBeacon",device.getAddress()+" ->>>" + rssi);
                 standBeaconsShowed.add(beacon);
+                notificationController.showNotification(new Stand("RosRoca",2),activity);
+
             }
 
             String ID_item = "Device name: " + beacon.getName() + "\nUUID: " + beacon.getUUID() + "\nMajor: " + beacon.getMajor() + "\nMinor: " + beacon.getMinor();
