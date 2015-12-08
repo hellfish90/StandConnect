@@ -37,7 +37,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editText_name_profile"
         android:layout_below="@+id/textView11"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -47,7 +47,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/editText_age_profile"
         android:layout_below="@+id/textView12"
         android:layout_toRightOf="@+id/imageView4"
         android:layout_alignRight="@+id/textView11"
@@ -65,7 +65,7 @@
     <EditText
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+        android:id="@+id/editText_city_profile"
         android:layout_below="@+id/textView13"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -76,13 +76,13 @@
         android:text="ZIP"
         android:id="@+id/textView14"
         android:layout_alignTop="@+id/textView13"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignRight="@+id/editText_age_profile"
+        android:layout_alignEnd="@+id/editText_age_profile" />
 
     <EditText
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
+        android:id="@+id/editText_zip_profile"
         android:layout_below="@+id/textView14"
         android:layout_alignLeft="@+id/textView14"
         android:layout_alignStart="@+id/textView14" />
@@ -92,14 +92,14 @@
         android:layout_height="wrap_content"
         android:text="Address"
         android:id="@+id/textView16"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/editText_city_profile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText6"
+        android:id="@+id/editText_address_profile"
         android:layout_below="@+id/textView16"
         android:layout_alignLeft="@+id/textView16"
         android:layout_alignStart="@+id/textView16"
@@ -112,15 +112,15 @@
         android:text="Gender"
         android:id="@+id/textView15"
         android:layout_alignTop="@+id/textView12"
-        android:layout_toRightOf="@+id/editText4"
-        android:layout_toEndOf="@+id/editText4" />
+        android:layout_toRightOf="@+id/editText_zip_profile"
+        android:layout_toEndOf="@+id/editText_zip_profile" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
+        android:id="@+id/editText_gender_profile"
         android:layout_below="@+id/textView15"
-        android:layout_toRightOf="@+id/editText4"
+        android:layout_toRightOf="@+id/editText_zip_profile"
         android:layout_alignRight="@+id/textView15"
         android:layout_alignEnd="@+id/textView15" />
 
@@ -129,16 +129,24 @@
         android:layout_height="wrap_content"
         android:text="e-mail"
         android:id="@+id/textView17"
-        android:layout_below="@+id/editText6"
+        android:layout_below="@+id/editText_address_profile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7"
+        android:id="@+id/editText_email_profile"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView17"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:id="@+id/button_save_profile"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
