@@ -21,5 +21,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detail_view">DetailView</string>
     <string name="title_activity_detail_activity_container">DetailActivityContainer</string>
+    <string name="title_activity_main_event_list">MainEventList</string>
 
 </resources>

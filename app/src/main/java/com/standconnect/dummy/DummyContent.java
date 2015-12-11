@@ -3,6 +3,7 @@ package com.standconnect.dummy;
 import com.standconnect.Models.Beacon;
 import com.standconnect.Models.Business;
 import com.standconnect.Models.Entity;
+import com.standconnect.Models.Event;
 import com.standconnect.Models.Product;
 import com.standconnect.Models.Tag;
 
@@ -24,6 +25,7 @@ public class DummyContent  implements Serializable{
     public static ArrayList<Entity> ITEM_PRODUCT_DUMMY = new ArrayList<Entity>();
     public static ArrayList<Entity> ITEM_TAGS_DUMMY = new ArrayList<Entity>();
     public static  ArrayList<Beacon> ITEM_BEACONS_EVENT = new ArrayList<>();
+    public static ArrayList<Event> ITEM_EVENT_DUMMY = new ArrayList<Event>();
 
 
     static {
@@ -68,6 +70,10 @@ public class DummyContent  implements Serializable{
         ITEM_TAGS_DUMMY.add(new Tag("Picante"));
 
         ITEM_BEACONS_EVENT.add(new Beacon("","",0,0,0,"D0:5F:B8:30:D9:93"));
+
+        ITEM_EVENT_DUMMY.add(new Event("Feria 1",null,null,"","",""));
+        ITEM_EVENT_DUMMY.add(new Event("Feria 2",null,null,"","",""));
+        ITEM_EVENT_DUMMY.add(new Event("Feria 3",null,null,"","",""));
 
     }
 
