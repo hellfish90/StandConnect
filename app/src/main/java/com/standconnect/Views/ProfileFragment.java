@@ -1,6 +1,8 @@
 package com.standconnect.Views;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,6 +78,7 @@ public class ProfileFragment extends Fragment {
         address = (EditText) view.findViewById(R.id.editText_address_profile);
         email = (EditText) view.findViewById(R.id.editText_email_profile);
         saveButton = (Button) view.findViewById(R.id.button_save_profile);
+        loadSavedPreferences();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,10 +92,45 @@ public class ProfileFragment extends Fragment {
                 Log.d("ProfileFragment", address.getText().toString());
                 Log.d("ProfileFragment", email.getText().toString());
 
+                savePreferences("StoredName", name.getText().toString());
+                savePreferences("StoredGender", gender.getText().toString());
+
             }
         });
 
         return view;
+    }
+
+    private void loadSavedPreferences() {
+        SharedPreferences sharedPreferences=this.getActivity().getSharedPreferences(ARG_VISITOR, 0);
+        String nombre = sharedPreferences.getString("StoredName", "");
+        String edad = sharedPreferences.getString("StoredAge", "");
+        String genero = sharedPreferences.getString("StoredGender", "");
+        String ciudad = sharedPreferences.getString("StoredCity", "");
+        String CP = sharedPreferences.getString("StoredZIP", "");
+        String direccion = sharedPreferences.getString("StoredAddress", "");
+        String correo_e = sharedPreferences.getString("StoredEMail", "");
+        name.setText(nombre);
+        age.setText(edad);
+        gender.setText(genero);
+        city.setText(ciudad);
+        zip.setText(CP);
+        address.setText(direccion);
+        email.setText(correo_e);
+    }
+
+    private void savePreferences(String key, String value) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(ARG_VISITOR, 0);
+        Editor editor = sharedPreferences.edit();
+        editor.putString("StoredName", name.getText().toString());
+        editor.putString("StoredAge", age.getText().toString());
+        editor.putString("StoredGender", gender.getText().toString());
+        editor.putString("StoredCity", city.getText().toString());
+        editor.putString("StoredZIP", zip.getText().toString());
+        editor.putString("StoredAddress", address.getText().toString());
+        editor.putString("StoredEMail", email.getText().toString());
+
+        editor.commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
