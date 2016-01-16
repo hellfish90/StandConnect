@@ -171,6 +171,11 @@ public class EventContainer extends AppCompatActivity
                 fragment = new ProfileFragment();
                 dataType = null;
 
+            }else if (id == R.id.nav_stand) {
+                //FormUserProfile
+                fragment = new ListEventContainerFragment();
+                dataType = DataType.Stand;
+
             }else{
                 //error fragment
                 fragment = new ListEventContainerFragment();

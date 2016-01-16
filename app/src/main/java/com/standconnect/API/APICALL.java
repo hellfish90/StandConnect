@@ -3,8 +3,11 @@ package com.standconnect.API;
 import android.widget.ProgressBar;
 
 import com.squareup.okhttp.OkHttpClient;
+import com.standconnect.BuildConfig;
+import com.standconnect.Models.Business;
 import com.standconnect.Models.Event;
 import com.standconnect.Models.Product;
+import com.standconnect.Models.Stand;
 import com.standconnect.Models.Tag;
 
 import java.util.List;
@@ -60,5 +63,11 @@ public class APICALL {
 
         @GET("events/{eventID}/products/")
         Call<List<Product>> getProducts(@Path("eventID") String eventID);
+
+        @GET("events/{eventID}/businesses/")
+        Call<List<Business>> getBusiness(@Path("eventID") String eventID);
+
+        @GET("events/{eventID}/stands/")
+        Call<List<Stand>> getStands(@Path("eventID") String eventID);
     }
 }

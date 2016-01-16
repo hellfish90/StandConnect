@@ -205,6 +205,10 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             case Product:
                 dataByType = listContainerController.getAllProducts(evetnId);
                 break;
+            case Stand:
+                dataByType = listContainerController.getAllStands(evetnId);
+                break;
+
         }
 
         } catch (NoInternetException e) {

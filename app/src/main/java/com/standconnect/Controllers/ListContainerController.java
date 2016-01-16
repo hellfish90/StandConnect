@@ -2,7 +2,9 @@ package com.standconnect.Controllers;
 
 import android.util.Log;
 
+import com.standconnect.DAO.DAOAPIBusiness;
 import com.standconnect.DAO.DAOAPIProducts;
+import com.standconnect.DAO.DAOAPIStands;
 import com.standconnect.DAO.DAOAPTags;
 import com.standconnect.DAO.NoInternetException;
 import com.standconnect.Models.Entity;
@@ -18,18 +20,41 @@ public class ListContainerController implements OnRefreshData {
 
     DAOAPTags daoTags;
     DAOAPIProducts daoapiProducts;
+    DAOAPIBusiness daoapiBusiness;
+    DAOAPIStands daoapiStands;
 
     OnRefreshData view;
 
     public ListContainerController(OnRefreshData view){
         daoTags = new DAOAPTags(this);
+        daoapiBusiness = new DAOAPIBusiness(this);
         daoapiProducts = new DAOAPIProducts(this);
+        daoapiStands = new DAOAPIStands(this);
         this.view = view;
     }
 
-    public ArrayList<Entity> getAllBusiness(String id){
+    public ArrayList<Entity> getAllStands(String id) throws NoInternetException {
+        ArrayList<? extends Entity> tags = (ArrayList<? extends Entity>) daoapiStands.getAll(id);
+        if (tags!= null){
+            Log.d("ListContainerController", tags.toString());
+            return (ArrayList<Entity>) tags;
+        }else{
+            view.onDownload();
+            daoapiStands.downloadData(id);
+            return new ArrayList<>();
+        }
+    }
 
-        return DummyContent.ITEM_BUSINESS_DUMMY;
+    public ArrayList<Entity> getAllBusiness(String id) throws NoInternetException {
+        ArrayList<? extends Entity> tags = (ArrayList<? extends Entity>) daoapiBusiness.getAll(id);
+        if (tags!= null){
+            Log.d("ListContainerController", tags.toString());
+            return (ArrayList<Entity>) tags;
+        }else{
+            view.onDownload();
+            daoapiBusiness.downloadData(id);
+            return new ArrayList<>();
+        }
     }
 
     public ArrayList<Entity> getAllProducts(String id) throws NoInternetException {
