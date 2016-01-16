@@ -26,4 +26,7 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'org.altbeacon:android-beacon-library:2+'
+
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta1'
 }

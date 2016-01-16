@@ -1,8 +1,10 @@
 package com.standconnect;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.standconnect.Controllers.ListContainerController;
+import com.standconnect.DAO.NoInternetException;
 import com.standconnect.Models.Entity;
+import com.standconnect.Models.Event;
+import com.standconnect.Utils.DataType;
+import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.dummy.DummyItem;
 
 import java.util.ArrayList;
@@ -27,7 +34,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class ListEventContainerFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class ListEventContainerFragment extends Fragment implements AbsListView.OnItemClickListener, OnRefreshData {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +45,13 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
     private String mParam1;
     private String mParam2;
 
-    List<DummyItem> dataEventContentList;
+    List<Entity> dataEventContentList;
+
+    DataType dataType;
+
+    String evetnId;
+
+    ListContainerController listContainerController;
 
     public static final String ARG_EVENT_CONTENT_LIST = "EVENT_LIST_CONTENT";
 
@@ -53,7 +66,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
+    private EntityListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
     public static ListEventContainerFragment newInstance(String param1, String param2, ArrayList<DummyItem> dataList) {
@@ -71,6 +84,8 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
      * fragment (e.g. upon screen orientation changes).
      */
     public ListEventContainerFragment() {
+
+        listContainerController = new ListContainerController(this);
     }
 
     @Override
@@ -80,12 +95,19 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            dataEventContentList = (List<DummyItem>) getArguments().get(ARG_EVENT_CONTENT_LIST);
+            dataType = (DataType) getArguments().get(ARG_EVENT_CONTENT_LIST);
+
+            evetnId= (String) getArguments().get("eventID");
+        }
+
+        try {
+            dataEventContentList = listContainerController.getAllTags(evetnId);
+        } catch (NoInternetException e) {
+            e.printStackTrace();
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, dataEventContentList);
+        mAdapter = new EntityListAdapter(getActivity(),dataEventContentList);
     }
 
     @Override
@@ -114,7 +136,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(dataEventContentList.get(position).id);
+            mListener.onFragmentInteraction(dataEventContentList.get(position).getName());
         }
 
         Entity dataSelected = dataEventContentList.get(position);
@@ -143,6 +165,39 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         }
     }
 
+    @Override
+    public void onDownload() {
+        //loadingBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void dataDownloaded() {
+
+        Log.d("ListEventsF", "onDownloaded");
+        //loadingBar.setVisibility(View.INVISIBLE);
+
+        try {
+            List<Entity> eventsArray = listContainerController.getAllTags(evetnId);
+            refreshList(eventsArray);
+
+        } catch (NoInternetException e) {
+            Log.e("ListEventsF","No InternetConnection"+e.getMessage());
+        }
+
+    }
+
+    public void refreshList(List<Entity> eventsArray){
+
+        mAdapter.notifyDataSetInvalidated();
+        mAdapter.clear();
+        dataEventContentList= (ArrayList<Entity>) eventsArray;
+        Log.d("ListF", "Refresh Data: " + eventsArray.toString());
+        mAdapter.addAll(dataEventContentList);
+        mAdapter.notifyDataSetChanged();
+        mListView.setAdapter(mAdapter);
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -158,4 +213,28 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         public void onFragmentInteraction(String id);
     }
 
+
+    private class EntityListAdapter extends ArrayAdapter<Entity> {
+        public EntityListAdapter(Context context, List<Entity> users) {
+            super(context, 0, users);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get the data item for this position
+            Entity event = getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_row_main_event_list, parent, false);
+            }
+            // Lookup view for data population
+            TextView eventName = (TextView) convertView.findViewById(R.id.textview_item_event_list_row);
+
+            // Populate the data into the template view using the data object
+            eventName.setText(event.getName()+" "+event.getName());
+
+            // Return the completed view to render on screen
+            return convertView;
+        }
+    }
 }

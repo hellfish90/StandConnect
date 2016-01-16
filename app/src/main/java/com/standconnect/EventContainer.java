@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +20,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.standconnect.Controllers.EventContainerController;
+import com.standconnect.DAO.NoInternetException;
 import com.standconnect.Models.Entity;
+import com.standconnect.Models.Event;
+import com.standconnect.Utils.DataType;
+import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.Views.LocationFragment;
 import com.standconnect.Views.ProfileFragment;
 import com.standconnect.dummy.DummyContent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class EventContainer extends AppCompatActivity
@@ -33,6 +39,10 @@ public class EventContainer extends AppCompatActivity
 
     EventContainerController eventContainerController;
 
+    String eventID;
+
+    Event event;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +50,11 @@ public class EventContainer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        eventContainerController = new EventContainerController(this);
+        Bundle extra = getIntent().getExtras();
+
+        if (extra!=null){
+            event = (Event) extra.getSerializable("event");
+        }
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -115,51 +129,57 @@ public class EventContainer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment;
+        Fragment fragment = null;
         Bundle args = new Bundle();
 
-        ArrayList<Entity> dataContentList = new ArrayList<>();
+         eventID = event.getId().toString();
 
-        if (id == R.id.nav_business) {
-            //listfragment
-            fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
+        Log.d("EventContainer",eventID);
 
-            // Handle the camera action
-        } else if (id == R.id.nav_products) {
-            //listfragment
-            fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllProducts("eventid");
-
-        } else if (id == R.id.nav_events_map) {
-            //stands image
-            fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
+        DataType dataType = null;
 
 
-        } else if (id == R.id.nav_location) {
-            //maps
-            fragment = new LocationFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
+            if (id == R.id.nav_business) {
+                //listfragment
+                fragment = new ListEventContainerFragment();
+                dataType= DataType.Business;
+
+                // Handle the camera action
+            } else if (id == R.id.nav_products) {
+                //listfragment
+                fragment = new ListEventContainerFragment();
+                dataType = DataType.Product;
+
+            } else if (id == R.id.nav_events_map) {
+                //stands image
+                fragment = new ListEventContainerFragment();
 
 
-        } else if (id == R.id.nav_tags) {
-            //checkList de tags
-            fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllTags("eventid");
+            } else if (id == R.id.nav_location) {
+                //maps
+                fragment = new LocationFragment();
 
-        } else if (id == R.id.nav_profile) {
-            //FormUserProfile
-            fragment = new ProfileFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
 
-        }else{
-            //error fragment
-            fragment = new ListEventContainerFragment();
-            dataContentList = eventContainerController.getAllBusiness("eventid");
-        }
+            } else if (id == R.id.nav_tags) {
+                //checkList de tags
+                fragment = new ListEventContainerFragment();
+                dataType = DataType.TAGS;
 
-        args.putSerializable(ListEventContainerFragment.ARG_EVENT_CONTENT_LIST, dataContentList);
+            } else if (id == R.id.nav_profile) {
+                //FormUserProfile
+                fragment = new ProfileFragment();
+                dataType = null;
+
+            }else{
+                //error fragment
+                fragment = new ListEventContainerFragment();
+
+            }
+
+
+
+        args.putSerializable(ListEventContainerFragment.ARG_EVENT_CONTENT_LIST, dataType);
+        args.putSerializable("eventID", event.getId().toString());
 
         fragment.setArguments(args);
 
@@ -171,7 +191,6 @@ public class EventContainer extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
     public static class PlanetFragment extends Fragment {

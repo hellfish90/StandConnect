@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Event implements Entity{
 
+    Integer id;
     String name;
     Date beginDate;
     Date endDate;
@@ -21,6 +22,14 @@ public class Event implements Entity{
         this.schedule = schedule;
         this.location = location;
         this.image = image;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
