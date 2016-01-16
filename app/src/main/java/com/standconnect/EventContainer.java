@@ -1,11 +1,11 @@
 package com.standconnect;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,6 +26,7 @@ import com.standconnect.Models.Event;
 import com.standconnect.Utils.DataType;
 import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.Views.LocationFragment;
+import com.standconnect.Views.MapsFragment;
 import com.standconnect.Views.ProfileFragment;
 import com.standconnect.dummy.DummyContent;
 
@@ -152,7 +153,7 @@ public class EventContainer extends AppCompatActivity
 
             } else if (id == R.id.nav_events_map) {
                 //stands image
-                fragment = new ListEventContainerFragment();
+                fragment = new MapsFragment();
 
 
             } else if (id == R.id.nav_location) {
@@ -180,10 +181,11 @@ public class EventContainer extends AppCompatActivity
 
         args.putSerializable(ListEventContainerFragment.ARG_EVENT_CONTENT_LIST, dataType);
         args.putSerializable("eventID", event.getId().toString());
+        args.putSerializable("event", event);
 
         fragment.setArguments(args);
 
-        FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_event_container_frame, fragment).commit();
 
 

@@ -2,12 +2,15 @@ package com.standconnect.Views;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.standconnect.Models.Event;
 import com.standconnect.R;
+import com.standconnect.Utils.DownloadImageTask;
 
 
 /**
@@ -27,6 +30,12 @@ public class LocationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Event event;
+
+    private ImageView image;
+
+    private DownloadImageTask taskLoadImage;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,14 +67,23 @@ public class LocationFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            event = (Event) getArguments().getSerializable("event");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view =inflater.inflate(R.layout.fragment_location, container, false);
+
+        image = (ImageView) view.findViewById(R.id.image_view_location);
+
+        taskLoadImage = new DownloadImageTask();
+        taskLoadImage.loadImageView(image);
+        taskLoadImage.execute(event.getImage());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

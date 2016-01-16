@@ -1,9 +1,10 @@
 package com.standconnect;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -41,7 +42,7 @@ public class DetailActivityContainer extends AppCompatActivity {
 
             Fragment fragment= BusinessDetailFragment.newInstance(business);
 
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_detail_container_frame, fragment).commit();
 
         }else if(detailData instanceof Product){
@@ -50,13 +51,10 @@ public class DetailActivityContainer extends AppCompatActivity {
 
             Fragment fragment= ProductDetailFragment.newInstance(product);
 
-            FragmentManager fragmentManager = getFragmentManager();
+            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_detail_container_frame, fragment).commit();
 
         }
-
-
-
 
     }
 
