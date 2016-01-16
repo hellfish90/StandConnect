@@ -5,9 +5,9 @@ package com.standconnect.Models;
  */
 public class Business implements Entity {
 
+    Integer id;
     String name;
     String description;
-    int standNumber;
     String image;
     String contact;
     String phone;
@@ -16,7 +16,6 @@ public class Business implements Entity {
     public Business(String name, String description, int standNumber, String image, String contact, String phone, String address) {
         this.name = name;
         this.description = description;
-        this.standNumber = standNumber;
         this.image = image;
         this.contact = contact;
         this.phone = phone;
@@ -39,13 +38,6 @@ public class Business implements Entity {
         this.description = description;
     }
 
-    public int getStandNumber() {
-        return standNumber;
-    }
-
-    public void setStandNumber(int standNumber) {
-        this.standNumber = standNumber;
-    }
 
     public String getImage() {
         return image;
@@ -103,7 +95,6 @@ public class Business implements Entity {
         return "Business{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", standNumber=" + standNumber +
                 ", image='" + image + '\'' +
                 ", contact='" + contact + '\'' +
                 ", phone='" + phone + '\'' +

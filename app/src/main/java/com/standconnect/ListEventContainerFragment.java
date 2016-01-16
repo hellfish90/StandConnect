@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.standconnect.Controllers.ListContainerController;
 import com.standconnect.DAO.NoInternetException;
@@ -68,6 +69,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
      */
     private EntityListAdapter mAdapter;
 
+
     // TODO: Rename and change types of parameters
     public static ListEventContainerFragment newInstance(String param1, String param2, ArrayList<DummyItem> dataList) {
         ListEventContainerFragment fragment = new ListEventContainerFragment();
@@ -100,11 +102,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             evetnId= (String) getArguments().get("eventID");
         }
 
-        try {
-            dataEventContentList = listContainerController.getAllTags(evetnId);
-        } catch (NoInternetException e) {
-            e.printStackTrace();
-        }
+        dataEventContentList = getDataByType();
 
         // TODO: Change Adapter to display your content
         mAdapter = new EntityListAdapter(getActivity(),dataEventContentList);
@@ -176,13 +174,9 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         Log.d("ListEventsF", "onDownloaded");
         //loadingBar.setVisibility(View.INVISIBLE);
 
-        try {
-            List<Entity> eventsArray = listContainerController.getAllTags(evetnId);
-            refreshList(eventsArray);
+        List<Entity> eventsArray = getDataByType();
+        refreshList(eventsArray);
 
-        } catch (NoInternetException e) {
-            Log.e("ListEventsF","No InternetConnection"+e.getMessage());
-        }
 
     }
 
@@ -196,6 +190,31 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         mAdapter.notifyDataSetChanged();
         mListView.setAdapter(mAdapter);
 
+    }
+
+    public List<Entity> getDataByType() {
+        List<Entity> dataByType = null;
+        try {
+        switch (dataType){
+            case Business:
+                dataByType = listContainerController.getAllBusiness(evetnId);
+                break;
+            case TAGS:
+                dataByType = listContainerController.getAllTags(evetnId);
+                break;
+            case Product:
+                dataByType = listContainerController.getAllProducts(evetnId);
+                break;
+        }
+
+        } catch (NoInternetException e) {
+
+            Toast.makeText(getActivity(), "No internetConnection",
+                    Toast.LENGTH_LONG).show();
+            return new ArrayList<>();
+        }
+
+        return dataByType;
     }
 
     /**

@@ -1,5 +1,8 @@
 package com.standconnect.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Marc on 24/11/15.
  */
@@ -7,15 +10,35 @@ public class Product implements Entity{
 
     String name;
     String description;
-    double price;
+    String price;
     String image;
+    private Business business;
+    private List<Tag> tags = new ArrayList<Tag>();
 
-    public Product(String name, String description, double price, String image) {
+    public Product(String name, String description, String price, String image) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
     }
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+
 
     public String getName() {
         return name;
@@ -33,11 +56,11 @@ public class Product implements Entity{
         this.description = description;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -56,7 +79,6 @@ public class Product implements Entity{
 
         Product product = (Product) o;
 
-        if (Double.compare(product.price, price) != 0) return false;
         if (name != null ? !name.equals(product.name) : product.name != null) return false;
         return !(description != null ? !description.equals(product.description) : product.description != null);
 
@@ -68,8 +90,7 @@ public class Product implements Entity{
         long temp;
         result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+
         return result;
     }
 

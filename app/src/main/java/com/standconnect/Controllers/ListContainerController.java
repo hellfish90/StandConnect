@@ -2,6 +2,7 @@ package com.standconnect.Controllers;
 
 import android.util.Log;
 
+import com.standconnect.DAO.DAOAPIProducts;
 import com.standconnect.DAO.DAOAPTags;
 import com.standconnect.DAO.NoInternetException;
 import com.standconnect.Models.Entity;
@@ -16,11 +17,13 @@ import java.util.ArrayList;
 public class ListContainerController implements OnRefreshData {
 
     DAOAPTags daoTags;
+    DAOAPIProducts daoapiProducts;
 
     OnRefreshData view;
 
     public ListContainerController(OnRefreshData view){
         daoTags = new DAOAPTags(this);
+        daoapiProducts = new DAOAPIProducts(this);
         this.view = view;
     }
 
@@ -29,8 +32,17 @@ public class ListContainerController implements OnRefreshData {
         return DummyContent.ITEM_BUSINESS_DUMMY;
     }
 
-    public ArrayList<Entity> getAllProducts(String id){
-        return DummyContent.ITEM_PRODUCT_DUMMY;
+    public ArrayList<Entity> getAllProducts(String id) throws NoInternetException {
+
+        ArrayList<? extends Entity> tags = (ArrayList<? extends Entity>) daoapiProducts.getAll(id);
+        if (tags!= null){
+            Log.d("ListContainerController", tags.toString());
+            return (ArrayList<Entity>) tags;
+        }else{
+            view.onDownload();
+            daoapiProducts.downloadData(id);
+            return new ArrayList<>();
+        }
     }
 
     public ArrayList<Entity> getAllTags(String id) throws NoInternetException {

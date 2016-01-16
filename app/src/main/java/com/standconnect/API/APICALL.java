@@ -1,7 +1,10 @@
 package com.standconnect.API;
 
+import android.widget.ProgressBar;
+
 import com.squareup.okhttp.OkHttpClient;
 import com.standconnect.Models.Event;
+import com.standconnect.Models.Product;
 import com.standconnect.Models.Tag;
 
 import java.util.List;
@@ -54,5 +57,8 @@ public class APICALL {
 
         @GET("events/{eventID}/tags/")
         Call<List<Tag>> getTags(@Path("eventID") String eventID);
+
+        @GET("events/{eventID}/products/")
+        Call<List<Product>> getProducts(@Path("eventID") String eventID);
     }
 }

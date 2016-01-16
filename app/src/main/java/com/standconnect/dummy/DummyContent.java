@@ -54,15 +54,15 @@ public class DummyContent  implements Serializable{
 
         ITEM_PRODUCT_DUMMY.add(new Product("Regaliz dulce",
                 "Regaliz Enrollado",
-                2.05,
+                "2.05",
                 "http://www.netaldea.es/files/2013/01/Regaliz-dulce-medicina.jpg"));
         ITEM_PRODUCT_DUMMY.add(new Product("Nube",
                 "Nube Dulce",
-                5.05,
+                "5.05",
                 "http://www.gastronomiaycia.com/wp-content/uploads/2011/12/malvaviscos_nubes.jpg"));
         ITEM_PRODUCT_DUMMY.add(new Product("Regaliz",
                 "Regaliz de campo",
-                4.05,
+                "4.05",
                 "http://www.botanical-online.com/fotos/plantasmedicinales/regaliz_regalessia3.jpeg"));
 
         ITEM_TAGS_DUMMY.add(new Tag("Dulce"));
