@@ -54,11 +54,47 @@ public class Stand implements Entity{
         return result;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Business> getBusinesses() {
+        return businesses;
+    }
+
+    public void setBusinesses(List<Business> businesses) {
+        this.businesses = businesses;
+    }
+
+    public List<Beacon> getBeacons() {
+        return beacons;
+    }
+
+    public void setBeacons(List<Beacon> beacons) {
+        this.beacons = beacons;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     @Override
     public String toString() {
         return "Stand{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", number=" + number +
+                ", businesses=" + businesses +
+                ", beacons=" + beacons +
+                ", event=" + event +
                 '}';
     }
 }

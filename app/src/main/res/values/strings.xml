@@ -22,5 +22,6 @@
     <string name="title_activity_detail_view">DetailView</string>
     <string name="title_activity_detail_activity_container">DetailActivityContainer</string>
     <string name="title_activity_main_event_list">MainEventList</string>
+    <string name="google_app_id">1090320560131-ml2scdc9pv75e07aiqrj80n0isvdn4mg.apps.googleusercontent.com</string>
 
 </resources>

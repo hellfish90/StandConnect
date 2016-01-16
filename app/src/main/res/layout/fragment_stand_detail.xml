@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product"
+        android:text="Name"
         android:textSize="20dp"
         android:id="@+id/textView"
         android:layout_marginTop="197dp"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="Number"
         android:textSize="20dp"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
+        android:text="Hola"
         android:id="@+id/textview_name_detail_stand"
         android:layout_alignTop="@+id/textView"
         android:layout_centerHorizontal="true" />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textview_description_detail_product"
+        android:id="@+id/textview_number_detail_stand"
         android:layout_alignTop="@+id/textView2"
         android:layout_alignLeft="@+id/textview_name_detail_stand"
         android:layout_alignStart="@+id/textview_name_detail_stand" />
@@ -71,9 +71,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textview_price_detail_product"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_alignLeft="@+id/textview_description_detail_product"
-        android:layout_alignStart="@+id/textview_description_detail_product" />
+        android:id="@+id/textview_business_detail_stand"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignStart="@+id/textview_number_detail_stand" />
 
 </RelativeLayout>

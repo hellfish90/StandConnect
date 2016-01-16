@@ -12,8 +12,10 @@ import android.util.Log;
 import com.standconnect.Models.Business;
 import com.standconnect.Models.Entity;
 import com.standconnect.Models.Product;
+import com.standconnect.Models.Stand;
 import com.standconnect.Views.BusinessDetailFragment;
 import com.standconnect.Views.ProductDetailFragment;
+import com.standconnect.Views.StandDetailFragment;
 
 public class DetailActivityContainer extends AppCompatActivity {
 
@@ -50,6 +52,15 @@ public class DetailActivityContainer extends AppCompatActivity {
             Product product = (Product) detailData;
 
             Fragment fragment= ProductDetailFragment.newInstance(product);
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_detail_container_frame, fragment).commit();
+
+        }else if(detailData instanceof Stand){
+
+            Stand stand = (Stand) detailData;
+
+            Fragment fragment= StandDetailFragment.newInstance(stand);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_detail_container_frame, fragment).commit();

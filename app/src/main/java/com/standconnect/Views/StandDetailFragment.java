@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.standconnect.Models.Product;
+import com.standconnect.Models.Stand;
 import com.standconnect.R;
 import com.standconnect.Utils.DownloadImageTask;
 
@@ -18,20 +18,20 @@ import com.standconnect.Utils.DownloadImageTask;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ProductDetailFragment.OnFragmentInteractionListener} interface
+ * {@link StandDetailFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ProductDetailFragment#newInstance} factory method to
+ * Use the {@link StandDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProductDetailFragment extends Fragment {
+public class StandDetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PRODUCT = "PRODUCT";
 
     // TODO: Rename and change types of parameters
-    private Product product;
+    private Stand stand;
 
-    private TextView name, description,price;
+    private TextView name, number, business;
     private ImageView image;
 
     private DownloadImageTask taskLoadImage;
@@ -47,8 +47,8 @@ public class ProductDetailFragment extends Fragment {
      * @return A new instance of fragment ProductDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductDetailFragment newInstance(Product argProduct) {
-        ProductDetailFragment fragment = new ProductDetailFragment();
+    public static StandDetailFragment newInstance(Stand argProduct) {
+        StandDetailFragment fragment = new StandDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PRODUCT, argProduct);
 
@@ -56,7 +56,7 @@ public class ProductDetailFragment extends Fragment {
         return fragment;
     }
 
-    public ProductDetailFragment() {
+    public StandDetailFragment() {
         // Required empty public constructor
     }
 
@@ -64,7 +64,7 @@ public class ProductDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.product = (Product) getArguments().getSerializable(ARG_PRODUCT);
+            this.stand = (Stand) getArguments().getSerializable(ARG_PRODUCT);
         }
     }
 
@@ -72,22 +72,28 @@ public class ProductDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_stand_detail, container, false);
 
         name = (TextView) view.findViewById(R.id.textview_name_detail_stand);
-        description = (TextView) view.findViewById(R.id.textview_description_detail_product);
-        price = (TextView) view.findViewById(R.id.textview_price_detail_product);
+        number = (TextView) view.findViewById(R.id.textview_number_detail_stand);
+        business = (TextView) view.findViewById(R.id.textview_business_detail_stand);
         image = (ImageView) view.findViewById(R.id.imageview_detail_product);
 
-        Log.d("ProductDetailFragment",product.toString());
+        Log.d("ProductDetailFragment", stand.toString());
 
-        name.setText(product.getName());
-        description.setText(product.getDescription());
-        price.setText(String.valueOf(product.getPrice()));
+        name.setText(stand.getName());
+        number.setText(stand.getNumber().toString());
+
+        if (stand.getBusinesses().size()>0){
+            business.setText(String.valueOf(stand.getBusinesses().get(0).getName()));
+        }else{
+            business.setText("No business");
+        }
+
 
         taskLoadImage = new DownloadImageTask();
         taskLoadImage.loadImageView(image);
-        taskLoadImage.execute(product.getImage());
+        //taskLoadImage.execute(stand.getImage());
         // Inflate the layout for this fragment
         return view;
     }
