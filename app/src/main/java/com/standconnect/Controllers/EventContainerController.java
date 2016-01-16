@@ -31,7 +31,7 @@ public class EventContainerController {
 
     public void scan(ArrayList<Beacon> beacons){
         isScanning = true;
-        beaconScannerController.startScanner(beacons);
+        beaconScannerController.startScanner(beacons,null);
     }
 
     public void stopScan(){

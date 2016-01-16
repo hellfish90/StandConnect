@@ -41,6 +41,8 @@ public class BeaconScannerController {
 
     private ArrayList<Beacon> standBeaconsShowed;
 
+    private ArrayList<Stand> standsList;
+
     public BeaconScannerController(Activity act){
         this.activity = act;
 
@@ -55,13 +57,12 @@ public class BeaconScannerController {
         scanhandler = new Handler();
         standBeaconsShowed =new ArrayList<>();
         notificationController =new NotificationController();
-
-
     }
 
-    public void startScanner(ArrayList<Beacon> beacons){
+    public void startScanner(ArrayList<Beacon> beacons, ArrayList<Stand> stands){
 
         standBeacons=beacons;
+        standsList =stands;
         scanRunable.run();
     }
 
@@ -109,8 +110,6 @@ public class BeaconScannerController {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
                 Log.d(TAG, "device name: " + device.getName());
-
-
             }
         }
 
@@ -167,9 +166,21 @@ public class BeaconScannerController {
             Log.d(TAG, "Device name: " + beacon.getName() + " UUID: " + beacon.getUUID() + "  Major: " + beacon.getMajor() + " Minor: " + beacon.getMinor() + " rssi: " + beacon.getRssi() + " power: " + Txpower + " mac:" + device.getAddress());
 
             if (rssi >  -70 && !standBeaconsShowed.contains(beacon) && standBeacons.contains(beacon) ){
-                Log.i("StandBeacon",device.getAddress()+" ->>>" + rssi);
+                Log.i("StandBeacon", device.getAddress() + " ->>>" + rssi);
                 standBeaconsShowed.add(beacon);
-                notificationController.showNotification(new Stand("RosRoca",2),activity);
+
+
+                Stand stand =null;
+
+                for (Stand st:standsList) {
+
+                    if (st.getBeacons().contains(beacon)){
+                        stand =st;
+                    }
+                }
+                if (stand!=null){
+                    notificationController.showNotification(stand, activity);
+                }
 
             }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,6 +9,71 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/textview_item_event_list_row"
-        android:layout_gravity="center_horizontal"
         android:layout_margin="10dp" />
-</LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Localization"
+        android:id="@+id/textView_loca_mainEvents"
+        android:layout_below="@+id/textview_item_event_list_row"
+        android:layout_alignStart="@+id/textview_item_event_list_row" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/textView_loca_mainEvents"
+        android:layout_alignStart="@+id/textView_loca_mainEvents">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Date Start"
+            android:id="@+id/textView_date_start_event"
+            android:layout_below="@+id/textView_loca_mainEvents"
+            android:layout_alignStart="@+id/textView_loca_mainEvents" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="To"
+            android:id="@+id/textView6"
+            android:layout_alignTop="@+id/textView_date_start_event"
+            android:layout_toEndOf="@+id/textView_loca_mainEvents"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Date End"
+            android:id="@+id/textView_date_finish_event_main"
+            android:layout_alignTop="@+id/textView6"
+            android:layout_toEndOf="@+id/textview_item_event_list_row"
+            android:layout_marginLeft="20dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Schedule"
+        android:id="@+id/textView_schedule_event_main"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignStart="@+id/textView_loca_mainEvents" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@android:drawable/ic_menu_view"
+        android:background="#689b37"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout" />
+
+</RelativeLayout>

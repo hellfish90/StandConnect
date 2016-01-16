@@ -21,7 +21,12 @@ import com.standconnect.Models.Event;
 import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.dummy.DummyContent;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import java.util.Date;
 import java.util.List;
 
 public class MainEventList extends AppCompatActivity implements OnRefreshData {
@@ -119,9 +124,23 @@ public class MainEventList extends AppCompatActivity implements OnRefreshData {
             }
             // Lookup view for data population
             TextView eventName = (TextView) convertView.findViewById(R.id.textview_item_event_list_row);
+            TextView eventLoc = (TextView) convertView.findViewById(R.id.textView_loca_mainEvents);
+            TextView dateStart = (TextView) convertView.findViewById(R.id.textView_date_start_event);
+            TextView dateEnd = (TextView) convertView.findViewById(R.id.textView_date_finish_event_main);
+
+            TextView schedule = (TextView) convertView.findViewById(R.id.textView_schedule_event_main);
 
             // Populate the data into the template view using the data object
-            eventName.setText(event.getName()+" "+event.getId());
+            eventName.setText(event.getName());
+            eventLoc.setText(event.getLocation());
+            Date datebegin=event.getBeginDate();
+            Date datend = event.getEndDate();
+
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+            dateStart.setText(formatter.format(datebegin));
+            dateEnd.setText(formatter.format(datend));
+            schedule.setText(event.getSchedule());
 
             // Return the completed view to render on screen
             return convertView;

@@ -17,6 +17,12 @@ public class Beacon implements Parcelable, Entity {
     private final int rssi;
     private final String mac;
 
+    //Beacon 1: 20:CD:39:A1:52:28
+    //Beacon 2: 78:A5:04:4A:2F:65
+    //Beacon 3: 78:A5:04:4A:2B:4A
+    //Beacon Google: C5:D9:2F:73:00:E1
+    //Mando: D0:5F:B8:30:D9:93
+
 
     public Beacon(String uuid, String name, int major, int minor, int rssi, String mac) {
         this.uuid = uuid;

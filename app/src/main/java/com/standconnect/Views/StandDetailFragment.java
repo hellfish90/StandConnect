@@ -1,5 +1,6 @@
 package com.standconnect.Views;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.standconnect.DetailActivityContainer;
 import com.standconnect.Models.Stand;
 import com.standconnect.R;
 import com.standconnect.Utils.DownloadImageTask;
@@ -86,6 +88,24 @@ public class StandDetailFragment extends Fragment {
 
         if (stand.getBusinesses().size()>0){
             business.setText(String.valueOf(stand.getBusinesses().get(0).getName()));
+
+
+
+            business.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(getActivity(), DetailActivityContainer.class);
+                    Bundle extras = new Bundle();
+
+                    extras.putSerializable(DetailActivityContainer.ARG_DETAIL_CONTENT_ENTITY, stand.getBusinesses().get(0));
+                    i.putExtras(extras);
+                    startActivity(i);
+                }
+            });
+
+
+
         }else{
             business.setText("No business");
         }

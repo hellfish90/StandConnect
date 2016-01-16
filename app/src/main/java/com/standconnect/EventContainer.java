@@ -1,6 +1,5 @@
 package com.standconnect;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,28 +19,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.standconnect.Controllers.EventContainerController;
-import com.standconnect.DAO.NoInternetException;
-import com.standconnect.Models.Entity;
+import com.standconnect.Models.Beacon;
 import com.standconnect.Models.Event;
+import com.standconnect.Models.Stand;
 import com.standconnect.Utils.DataType;
-import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.Views.LocationFragment;
 import com.standconnect.Views.MapsFragment;
 import com.standconnect.Views.ProfileFragment;
 import com.standconnect.dummy.DummyContent;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class EventContainer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static ArrayList<Beacon> beacons;
+    public static ArrayList<Stand> stands;
 
     EventContainerController eventContainerController;
 
     String eventID;
-
     Event event;
 
     @Override
@@ -56,6 +54,11 @@ public class EventContainer extends AppCompatActivity
         if (extra!=null){
             event = (Event) extra.getSerializable("event");
         }
+
+        beacons = new ArrayList<>();
+        stands = new ArrayList<>();
+
+        eventContainerController = new EventContainerController(this);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

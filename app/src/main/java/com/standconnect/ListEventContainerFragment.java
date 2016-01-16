@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.standconnect.Controllers.ListContainerController;
 import com.standconnect.DAO.NoInternetException;
 import com.standconnect.Models.Entity;
-import com.standconnect.Models.Event;
+import com.standconnect.Models.Tag;
 import com.standconnect.Utils.DataType;
 import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.dummy.DummyItem;
@@ -70,6 +70,8 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
     private EntityListAdapter mAdapter;
 
 
+    private ArrayList<String> tagsPressed;
+
     // TODO: Rename and change types of parameters
     public static ListEventContainerFragment newInstance(String param1, String param2, ArrayList<DummyItem> dataList) {
         ListEventContainerFragment fragment = new ListEventContainerFragment();
@@ -101,7 +103,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
 
             evetnId= (String) getArguments().get("eventID");
         }
-
+        tagsPressed = new ArrayList<>();
         dataEventContentList = getDataByType();
 
         // TODO: Change Adapter to display your content
@@ -189,6 +191,22 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         mAdapter.addAll(dataEventContentList);
         mAdapter.notifyDataSetChanged();
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (dataType == DataType.TAGS){
+                    if (tagsPressed.contains(String.valueOf(position))){
+
+                        tagsPressed.remove(String.valueOf(position));
+                        Tag tag = (Tag) dataEventContentList.get(position);
+
+                    }else{
+                        tagsPressed.add(String.valueOf(position));
+                        //EventContainer.beacons.add();
+                    }
+                }
+            }
+        });
 
     }
 
@@ -248,7 +266,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             Entity event = getItem(position);
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_row_main_event_list, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_row_generic_list, parent, false);
             }
             // Lookup view for data population
             TextView eventName = (TextView) convertView.findViewById(R.id.textview_item_event_list_row);
