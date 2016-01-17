@@ -11,13 +11,21 @@ public class Stand implements Entity{
     private Integer id;
     private String name;
     private Integer number;
+    private String image;
     private List<Business> businesses = new ArrayList<Business>();
-    private List<Beacon> beacons = new ArrayList<Beacon>();
     private Event event;
 
     public Stand(String name, Integer number) {
         this.name = name;
         this.number = number;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -70,13 +78,6 @@ public class Stand implements Entity{
         this.businesses = businesses;
     }
 
-    public List<Beacon> getBeacons() {
-        return beacons;
-    }
-
-    public void setBeacons(List<Beacon> beacons) {
-        this.beacons = beacons;
-    }
 
     public Event getEvent() {
         return event;
@@ -91,10 +92,7 @@ public class Stand implements Entity{
         return "Stand{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", number=" + number +
                 ", businesses=" + businesses +
-                ", beacons=" + beacons +
-                ", event=" + event +
                 '}';
     }
 }

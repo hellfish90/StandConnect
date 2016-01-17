@@ -5,6 +5,7 @@ import android.widget.ProgressBar;
 import com.squareup.okhttp.OkHttpClient;
 import com.standconnect.BuildConfig;
 import com.standconnect.Models.Business;
+import com.standconnect.Models.DataForScanner;
 import com.standconnect.Models.Event;
 import com.standconnect.Models.Product;
 import com.standconnect.Models.Stand;
@@ -36,7 +37,6 @@ public class APICALL {
         okHttpClient.setReadTimeout(45, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
 
-
         return new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .client(okHttpClient)
@@ -47,7 +47,6 @@ public class APICALL {
     public static SmartVilaApiInterface getAPIStandConnect() {
         if (standConnectAPI == null) {
             Retrofit retrofit = generateRetrofit();
-
             standConnectAPI = retrofit.create(SmartVilaApiInterface.class);
         }
 
@@ -69,5 +68,9 @@ public class APICALL {
 
         @GET("events/{eventID}/stands/")
         Call<List<Stand>> getStands(@Path("eventID") String eventID);
+
+        @GET("events/{eventID}/businesses/")
+        Call<List<DataForScanner>> getDataForScanner(@Path("eventID") String eventID);
+
     }
 }

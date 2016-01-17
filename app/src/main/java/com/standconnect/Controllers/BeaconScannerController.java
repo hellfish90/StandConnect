@@ -12,11 +12,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.standconnect.Models.Beacon;
+import com.standconnect.Models.ScannerData;
 import com.standconnect.Models.Stand;
 import com.standconnect.Utils.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -43,6 +45,8 @@ public class BeaconScannerController {
 
     private ArrayList<Stand> standsList;
 
+    private List<ScannerData> scannerData;
+
     public BeaconScannerController(Activity act){
         this.activity = act;
 
@@ -59,9 +63,20 @@ public class BeaconScannerController {
         notificationController =new NotificationController();
     }
 
-    public void startScanner(ArrayList<Beacon> beacons, ArrayList<Stand> stands){
+    public void startScanner(List<ScannerData> beaconss, ArrayList<Stand> stands){
 
-        standBeacons=beacons;
+        scannerData=beaconss;
+
+        Log.d("scannerDaplays",beaconss.toString());
+
+        standBeacons= new ArrayList<>();
+
+        for (ScannerData sc: beaconss){
+            standBeacons.add(sc.getBeacon());
+        }
+
+        Log.d("standBeacons",standBeacons.toString());
+
         standsList =stands;
         scanRunable.run();
     }
@@ -162,22 +177,24 @@ public class BeaconScannerController {
 
             Beacon beacon = new Beacon(uuid,device.getName(),major,minor,rssi,device.getAddress());
 
-            Log.i("BeaconScanerController", "NEW!!");
+            //Log.i("BeaconScanerController", "NEW!!");
             Log.d(TAG, "Device name: " + beacon.getName() + " UUID: " + beacon.getUUID() + "  Major: " + beacon.getMajor() + " Minor: " + beacon.getMinor() + " rssi: " + beacon.getRssi() + " power: " + Txpower + " mac:" + device.getAddress());
+            Log.d("hola",standBeaconsShowed.toString());
+            Log.d("hola",standBeacons.toString());
 
             if (rssi >  -70 && !standBeaconsShowed.contains(beacon) && standBeacons.contains(beacon) ){
                 Log.i("StandBeacon", device.getAddress() + " ->>>" + rssi);
                 standBeaconsShowed.add(beacon);
 
-
                 Stand stand =null;
 
-                for (Stand st:standsList) {
 
-                    if (st.getBeacons().contains(beacon)){
-                        stand =st;
+                for (ScannerData sc: scannerData) {
+                    if (sc.getBeacon().getMac().equals(beacon.getMac())){
+                        stand = sc.getStand();
                     }
                 }
+
                 if (stand!=null){
                     notificationController.showNotification(stand, activity);
                 }
@@ -226,3 +243,5 @@ public class BeaconScannerController {
     };
 
 }
+
+

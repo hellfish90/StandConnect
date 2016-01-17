@@ -20,24 +20,31 @@ import android.widget.TextView;
 
 import com.standconnect.Controllers.EventContainerController;
 import com.standconnect.Models.Beacon;
+import com.standconnect.Models.DataForScanner;
 import com.standconnect.Models.Event;
+import com.standconnect.Models.ScannerData;
 import com.standconnect.Models.Stand;
 import com.standconnect.Utils.DataType;
+import com.standconnect.Utils.OnRefreshData;
 import com.standconnect.Views.LocationFragment;
 import com.standconnect.Views.MapsFragment;
 import com.standconnect.Views.ProfileFragment;
 import com.standconnect.dummy.DummyContent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class EventContainer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnRefreshData {
 
-    public static ArrayList<Beacon> beacons;
-    public static ArrayList<Stand> stands;
+
 
     EventContainerController eventContainerController;
+
+    public static List<ScannerData> scannerData;
+
+    public static List<DataForScanner> dataforScanner;
 
     String eventID;
     Event event;
@@ -49,16 +56,29 @@ public class EventContainer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        scannerData =new ArrayList<>();
+
         Bundle extra = getIntent().getExtras();
 
         if (extra!=null){
             event = (Event) extra.getSerializable("event");
         }
 
-        beacons = new ArrayList<>();
-        stands = new ArrayList<>();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        eventContainerController = new EventContainerController(this);
+        View headerLayout = navigationView.getHeaderView(0);
+
+        TextView eventNameT = (TextView) headerLayout.findViewById(R.id.header_event_name);
+
+        navigationView.setCheckedItem(R.id.nav_stand);
+
+        //Start to the first item of the menu
+        MenuItem eventItemm =navigationView.getMenu().getItem(0);
+        onNavigationItemSelected(eventItemm);
+
+
+        eventContainerController = new EventContainerController(this,this);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +95,11 @@ public class EventContainer extends AppCompatActivity
                             .setAction("Action", null).show();
                 }else{
 
-                    eventContainerController.scan(DummyContent.ITEM_BEACONS_EVENT);
+                    eventContainerController.scan(scannerData);
                     fab.setImageResource(R.mipmap.ic_gps_fixed_white_24dp);
                     Snackbar.make(view, "Is Scanning", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-
 
             }
         });
@@ -91,8 +110,9 @@ public class EventContainer extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        dataforScanner = eventContainerController.getDataForScanner(eventID);
+
+        
     }
 
     @Override
@@ -136,7 +156,11 @@ public class EventContainer extends AppCompatActivity
         Fragment fragment = null;
         Bundle args = new Bundle();
 
-         eventID = event.getId().toString();
+        if (event!=null){
+            eventID = event.getId().toString();
+        }
+
+
 
         Log.d("EventContainer",eventID);
 
@@ -202,27 +226,16 @@ public class EventContainer extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onDownload() {
 
-    public static class PlanetFragment extends Fragment {
-        public static final String ARG_PLANET_NUMBER = "planet_number";
+    }
 
-        public PlanetFragment() {
-            // Empty constructor required for fragment subclasses
-        }
+    @Override
+    public void dataDownloaded() {
+        dataforScanner = eventContainerController.getDataForScanner(eventID);
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_planet, container, false);
-            int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            String planet = getResources().getStringArray(R.array.planets_array)[i];
-
-            int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
-                    "drawable", getActivity().getPackageName());
-            ((TextView) rootView.findViewById(R.id.text_fragment)).setText(planet);
-            getActivity().setTitle(planet);
-            return rootView;
-        }
+        Log.d("lolo",dataforScanner.toString());
     }
 
 }

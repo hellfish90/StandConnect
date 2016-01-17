@@ -4,10 +4,20 @@ package com.standconnect.Models;
  * Created by Marc on 24/11/15.
  */
 public class Tag implements Entity{
+
+    Integer id;
     String name;
 
     public Tag(String name) {
         this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

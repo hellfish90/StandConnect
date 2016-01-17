@@ -113,7 +113,7 @@ public class StandDetailFragment extends Fragment {
 
         taskLoadImage = new DownloadImageTask();
         taskLoadImage.loadImageView(image);
-        //taskLoadImage.execute(stand.getImage());
+        taskLoadImage.execute(stand.getImage());
         // Inflate the layout for this fragment
         return view;
     }

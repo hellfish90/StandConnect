@@ -22,7 +22,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Drawable> {
 
     private Drawable loadImageFromNetwork(String url) {
         try {
-            InputStream is = (InputStream) new URL(url).getContent();
+            InputStream is = (InputStream) new URL(url+".jpg").getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
             return d;
         } catch (Exception e) {

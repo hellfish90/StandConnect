@@ -17,7 +17,9 @@ import android.widget.Toast;
 
 import com.standconnect.Controllers.ListContainerController;
 import com.standconnect.DAO.NoInternetException;
+import com.standconnect.Models.DataForScanner;
 import com.standconnect.Models.Entity;
+import com.standconnect.Models.ScannerData;
 import com.standconnect.Models.Tag;
 import com.standconnect.Utils.DataType;
 import com.standconnect.Utils.OnRefreshData;
@@ -115,6 +117,25 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listcontentevent, container, false);
 
+        TextView nameList = (TextView) view.findViewById(R.id.textView_list_name);
+
+        switch (dataType){
+            case Business:
+                nameList.setText("Business");
+                break;
+            case TAGS:
+                nameList.setText("TAGS");
+                break;
+            case Product:
+                nameList.setText("Products");
+                break;
+            case Stand:
+                nameList.setText("Stands");
+                break;
+        }
+
+
+
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
@@ -139,16 +160,60 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             mListener.onFragmentInteraction(dataEventContentList.get(position).getName());
         }
 
-        Entity dataSelected = dataEventContentList.get(position);
+                if (dataType == DataType.TAGS){
+                    if (tagsPressed.contains(String.valueOf(position))){
+                        tagsPressed.remove(String.valueOf(position));
 
-        Bundle args = new Bundle();
 
-        args.putSerializable(DetailActivityContainer.ARG_DETAIL_CONTENT_ENTITY,dataSelected);
 
-        Intent i =new Intent(getActivity(),DetailActivityContainer.class);
-        i.putExtras(args);
 
-        startActivity(i);
+                    }else{
+                        Tag tag = (Tag) dataEventContentList.get(position);
+
+                        Log.d("FILTERBUSSINES",tag.toString());
+
+                        tagsPressed.add(String.valueOf(position));
+
+                        ArrayList<DataForScanner> datacontainsTag = new ArrayList<>();
+
+                        Log.d("FILTERBUSSINES",EventContainer.dataforScanner.toString());
+
+                        for (DataForScanner datafSC: EventContainer.dataforScanner){
+                            if (datafSC.getTags().contains(tag)){
+                                datacontainsTag.add(datafSC);
+                            }
+                        }
+
+                        Log.d("FILTERBUSSINES",datacontainsTag.toString());
+                        Log.d("FILTERBUSSINES","_________________________");
+
+                        ArrayList<ScannerData> scannerdata =new ArrayList<>();
+
+                        for (DataForScanner df: datacontainsTag){
+                            ScannerData sc = new ScannerData();
+                            sc.setTags(df.getTags());
+                            sc.setBeacon(df.getBeacons().get(0));
+                            sc.setStand(df.getStands().get(0));
+                            scannerdata.add(sc);
+
+                        }
+
+                        EventContainer.scannerData.addAll(scannerdata);
+
+
+                    }
+                }else{
+                    Entity dataSelected = dataEventContentList.get(position);
+
+                    Bundle args = new Bundle();
+
+                    args.putSerializable(DetailActivityContainer.ARG_DETAIL_CONTENT_ENTITY,dataSelected);
+
+                    Intent i =new Intent(getActivity(),DetailActivityContainer.class);
+                    i.putExtras(args);
+
+                    startActivity(i);
+                }
 
     }
 
@@ -191,22 +256,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         mAdapter.addAll(dataEventContentList);
         mAdapter.notifyDataSetChanged();
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (dataType == DataType.TAGS){
-                    if (tagsPressed.contains(String.valueOf(position))){
 
-                        tagsPressed.remove(String.valueOf(position));
-                        Tag tag = (Tag) dataEventContentList.get(position);
-
-                    }else{
-                        tagsPressed.add(String.valueOf(position));
-                        //EventContainer.beacons.add();
-                    }
-                }
-            }
-        });
 
     }
 

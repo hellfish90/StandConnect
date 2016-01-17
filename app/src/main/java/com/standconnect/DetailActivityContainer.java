@@ -32,6 +32,8 @@ public class DetailActivityContainer extends AppCompatActivity {
 
         Bundle args = getIntent().getExtras();
 
+        Log.d("HEY","");
+
         if (args!=null){
             detailData = (Entity) args.getSerializable(ARG_DETAIL_CONTENT_ENTITY);
         }else{

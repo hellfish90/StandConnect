@@ -1,6 +1,8 @@
 package com.standconnect.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Marc on 24/11/15.
@@ -14,6 +16,9 @@ public class Event implements Entity{
     String schedule;
     String location;
     String image;
+    private List<Stand> stands = new ArrayList<Stand>();
+    private List<Business> businesses = new ArrayList<Business>();
+
 
     public Event(String name, Date beginDate, Date endDate, String schedule, String location, String image) {
         this.name = name;

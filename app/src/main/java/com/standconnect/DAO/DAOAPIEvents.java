@@ -33,6 +33,7 @@ public class DAOAPIEvents extends DAOAPI<Event> {
         call.enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Response<List<Event>> response) {
+
                 events = response.body();
                 view.dataDownloaded();
             }
