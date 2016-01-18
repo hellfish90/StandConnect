@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -161,6 +162,9 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         }
 
                 if (dataType == DataType.TAGS){
+
+                    RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.relative_layout_item_row_generic_list);
+
                     if (tagsPressed.contains(String.valueOf(position))){
                         tagsPressed.remove(String.valueOf(position));
 
@@ -169,6 +173,8 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
 
                     }else{
                         Tag tag = (Tag) dataEventContentList.get(position);
+
+                        layout.setBackgroundColor(0xFF00FF00);
 
                         Log.d("FILTERBUSSINES",tag.toString());
 
