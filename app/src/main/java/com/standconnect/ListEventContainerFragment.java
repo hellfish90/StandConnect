@@ -128,7 +128,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
                 nameList.setText(getResources().getString(R.string.title_tags));
                 break;
             case Product:
-                nameList.setText(getResources().getString(R.string.title_product));
+                nameList.setText(getResources().getString(R.string.title_products));
                 break;
             case Stand:
                 nameList.setText(getResources().getString(R.string.title_stand));
@@ -335,7 +335,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             TextView eventName = (TextView) convertView.findViewById(R.id.textview_item_event_list_row);
 
             // Populate the data into the template view using the data object
-            eventName.setText(event.getName()+" "+event.getName());
+            eventName.setText(event.getName());
 
             // Return the completed view to render on screen
             return convertView;

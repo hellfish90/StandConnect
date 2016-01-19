@@ -25,7 +25,7 @@
     <string name="google_app_id">1090320560131-ml2scdc9pv75e07aiqrj80n0isvdn4mg.apps.googleusercontent.com</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="title_stand">Estand</string>
+    <string name="title_stand">Estands</string>
     <string name="title_business">Empreses</string>
     <string name="title_products">Productes</string>
     <string name="title_event_map">Mapa del Event</string>

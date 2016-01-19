@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
         android:src="@android:drawable/ic_menu_view"
-        android:background="#689b37"
+        android:background="#03A9F4"
         android:layout_above="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout" />
 
