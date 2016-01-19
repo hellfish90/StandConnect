@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">StandConnect</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail_view">DetailView</string>
+    <string name="title_activity_detail_activity_container">DetailActivityContainer</string>
+    <string name="title_activity_main_event_list">MainEventList</string>
+    <string name="google_app_id">1090320560131-ml2scdc9pv75e07aiqrj80n0isvdn4mg.apps.googleusercontent.com</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="title_stand">Estand</string>
+    <string name="title_business">Empreses</string>
+    <string name="title_products">Productes</string>
+    <string name="title_event_map">Mapa del Event</string>
+    <string name="title_location">Mapa</string>
+    <string name="title_tags">Tags</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_events_list">Llista d\'events</string>
+    <string name="title_events_detail">Vista detall</string>
+    <string name="title_events_map">Mapa</string>
+
+    <string name="title_name">Nom</string>
+    <string name="title_number">Número</string>
+    <string name="title_description">Descripció</string>
+    <string name="title_contact">Contacte</string>
+    <string name="title_phone">Telèfon</string>
+    <string name="title_address">Adreça</string>
+
+    <string name="title_product">Producte</string>
+    <string name="title_price">Preu</string>
+
+    <string name="title_start_scanning">Inici escaneig</string>
+    <string name="title_stop_scanning"> Escaneig aturat</string>
+
+    <string name="title_age">Edat</string>
+    <string name="title_gender">Genere</string>
+    <string name="title_city">Ciutat</string>
+    <string name="title_zip">CP</string>
+    <string name="title_email">Correu electrònic</string>
+
+
+</resources>

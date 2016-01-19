@@ -49,11 +49,11 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".DetailActivityContainer"
-            android:label="@string/title_activity_detail_activity_container"
+            android:label="@string/title_events_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainEventList"
-            android:label="@string/title_activity_main_event_list"
+            android:label="@string/title_events_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,7 +73,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_events_map"></activity>
     </application>
 
 </manifest>
