@@ -5,8 +5,8 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:layout_width="500dp"
-        android:layout_height="175dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:id="@+id/imageview_detail_business"
         android:scaleType="centerInside"
         android:src="@drawable/cargando" />
