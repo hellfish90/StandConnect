@@ -1,6 +1,8 @@
 package com.standconnect;
 
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -32,6 +34,8 @@ public class DetailActivityContainer extends AppCompatActivity {
 
         Bundle args = getIntent().getExtras();
 
+
+        cancelNotification(this,001);
         Log.d("HEY","");
 
         if (args!=null){
@@ -69,6 +73,12 @@ public class DetailActivityContainer extends AppCompatActivity {
 
         }
 
+    }
+
+    public static void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.standconnect;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -180,7 +181,11 @@ public class EventContainer extends AppCompatActivity
 
             } else if (id == R.id.nav_events_map) {
                 //stands image
-                fragment = new MapsFragment();
+                Intent intent = new Intent(this,MapsActivity.class);
+
+                intent.putExtra("location",event.getLocation());
+
+                startActivity(intent);
 
 
             } else if (id == R.id.nav_location) {
@@ -215,14 +220,18 @@ public class EventContainer extends AppCompatActivity
         args.putSerializable("eventID", event.getId().toString());
         args.putSerializable("event", event);
 
-        fragment.setArguments(args);
+        if (fragment!=null){
 
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_event_container_frame, fragment).commit();
+            fragment.setArguments(args);
+
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_event_container_frame, fragment).commit();
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+
         return true;
     }
 

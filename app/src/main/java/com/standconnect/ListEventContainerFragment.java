@@ -164,15 +164,22 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
                 if (dataType == DataType.TAGS){
 
                     RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.relative_layout_item_row_generic_list);
-
+                    Tag tag = (Tag) dataEventContentList.get(position);
                     if (tagsPressed.contains(String.valueOf(position))){
                         tagsPressed.remove(String.valueOf(position));
+                        layout.setBackgroundColor(0x00000000);
 
+                        ArrayList<ScannerData> scannerdatafordelete =new ArrayList<>();
 
-
+                        for(ScannerData dt: EventContainer.scannerData){
+                            if (dt.getTags().contains(tag)){
+                                scannerdatafordelete.add(dt);
+                                Log.d("lolo",dt.toString());
+                            }
+                        }
+                        EventContainer.scannerData.removeAll(scannerdatafordelete);
 
                     }else{
-                        Tag tag = (Tag) dataEventContentList.get(position);
 
                         layout.setBackgroundColor(0xFF00FF00);
 
