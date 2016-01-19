@@ -100,6 +100,14 @@
                     android:id="@+id/textview_business_detail_stand"
                     android:layout_alignBottom="@+id/textView3"
                     android:layout_alignStart="@+id/textview_number_detail_stand" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:tint="#0e0d0d" />
             </LinearLayout>
 
         </LinearLayout>
