@@ -78,6 +78,9 @@ public class EventContainer extends AppCompatActivity
         MenuItem eventItemm =navigationView.getMenu().getItem(0);
         onNavigationItemSelected(eventItemm);
 
+        if (event!=null){
+            eventNameT.setText(event.getName());
+        }
 
         eventContainerController = new EventContainerController(this,this);
 

@@ -122,16 +122,16 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
 
         switch (dataType){
             case Business:
-                nameList.setText("Business");
+                nameList.setText(getResources().getString(R.string.title_business));
                 break;
             case TAGS:
-                nameList.setText("TAGS");
+                nameList.setText(getResources().getString(R.string.title_tags));
                 break;
             case Product:
-                nameList.setText("Products");
+                nameList.setText(getResources().getString(R.string.title_product));
                 break;
             case Stand:
-                nameList.setText("Stands");
+                nameList.setText(getResources().getString(R.string.title_stand));
                 break;
         }
 
