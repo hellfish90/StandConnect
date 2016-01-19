@@ -163,7 +163,7 @@
                 android:id="@+id/button_save_profile"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="right" />
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
     </ScrollView>

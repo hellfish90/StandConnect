@@ -42,6 +42,7 @@
     <string name="title_contact">Contacto</string>
     <string name="title_phone">Teléfono</string>
     <string name="title_address">Direccion</string>
+    <string name="title_businesse">Empresa</string>
 
     <string name="title_product">Producto</string>
     <string name="title_price">Precio</string>

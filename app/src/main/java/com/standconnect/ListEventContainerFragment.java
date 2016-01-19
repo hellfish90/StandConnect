@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,8 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
     private String mParam2;
 
     List<Entity> dataEventContentList;
+
+    ProgressBar progressBar;
 
     DataType dataType;
 
@@ -107,10 +110,7 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
             evetnId= (String) getArguments().get("eventID");
         }
         tagsPressed = new ArrayList<>();
-        dataEventContentList = getDataByType();
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new EntityListAdapter(getActivity(),dataEventContentList);
     }
 
     @Override
@@ -119,6 +119,15 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
         View view = inflater.inflate(R.layout.fragment_listcontentevent, container, false);
 
         TextView nameList = (TextView) view.findViewById(R.id.textView_list_name);
+
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+
+        progressBar.setVisibility(View.INVISIBLE);
+
+        dataEventContentList = getDataByType();
+
+        // TODO: Change Adapter to display your content
+        mAdapter = new EntityListAdapter(getActivity(),dataEventContentList);
 
         switch (dataType){
             case Business:
@@ -245,14 +254,14 @@ public class ListEventContainerFragment extends Fragment implements AbsListView.
 
     @Override
     public void onDownload() {
-        //loadingBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void dataDownloaded() {
 
         Log.d("ListEventsF", "onDownloaded");
-        //loadingBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         List<Entity> eventsArray = getDataByType();
         refreshList(eventsArray);
