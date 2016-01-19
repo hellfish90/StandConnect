@@ -9,7 +9,7 @@
         android:layout_height="175dp"
         android:id="@+id/imageview_detail_business"
         android:scaleType="centerInside"
-        android:src="@drawable/logoempresa" />
+        android:src="@drawable/cargando" />
 
     <TextView
         android:layout_width="wrap_content"
